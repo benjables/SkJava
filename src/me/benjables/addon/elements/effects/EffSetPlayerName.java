@@ -9,31 +9,34 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-public class EffSendMessage extends Effect {
-
-    Expression<Player> player;
-    Expression<String> msg;
+public class EffSetPlayerName extends Effect {
 
     static {
-        Skript.registerEffect(EffSendMessage.class, "%player%.sendMessage{%string%}");
+        Skript.registerEffect(EffSetPlayerName.class, "%player%.setDisplayName{%string%}");
     }
+
+    Expression<Player> player;
+    Expression<String> name;
 
     @Override
     protected void execute(Event event) {
-        String s = this.msg.getSingle(event);
-        Player p = this.player.getSingle(event);
-        p.sendMessage(ChatColor.translateAlternateColorCodes('&', s));
+        Player p = player.getSingle(event);
+        String s = name.getSingle(event);
+        s = ChatColor.translateAlternateColorCodes('&', s);
+        if (p != null && s != null) {
+            p.setDisplayName(s);
+        }
     }
 
     @Override
     public String toString(Event event, boolean b) {
-        return "Send Message to player";
+        return "Set player's display name";
     }
 
     @Override
     public boolean init(Expression<?>[] expressions, int i, Kleenean kleenean, SkriptParser.ParseResult parseResult) {
-        this.player = (Expression<Player>) expressions[0];
-        this.msg = (Expression<String>) expressions[1];
+        player = (Expression<Player>) expressions[0];
+        name = (Expression<String>) expressions[1];
         return true;
     }
 }
