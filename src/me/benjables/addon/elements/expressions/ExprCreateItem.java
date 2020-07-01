@@ -18,24 +18,24 @@ import java.util.List;
 public class ExprCreateItem extends SimpleExpression<ItemStack> {
 
     static {
-        Skript.registerExpression(ExprCreateItem.class, ItemStack.class, ExpressionType.COMBINED, "new Item{%string%, %string%, %number%, %strings%");
+        Skript.registerExpression(ExprCreateItem.class, ItemStack.class, ExpressionType.COMBINED, "ItemBuilder{%string%, %string%, %number%, %strings%}");
     }
 
-    Expression<String> material;
     Expression<String> name;
     Expression<Number> amount;
-    Expression<List<String>> lore;
+    Expression<String> lore;
+    Expression<String> material;
 
     @Override
     protected ItemStack[] get(Event event) {
         String n = name.getSingle(event);
         n = ChatColor.translateAlternateColorCodes('&', n);
         int a = amount.getSingle(event).intValue();
-        String[] l = (String[]) lore.getSingle(event).toArray();
-        for (int i = 0; i < l.length; i++) {
-            l[i] = ChatColor.translateAlternateColorCodes('&', l[i]);
-        }
         Material m = Material.valueOf(material.getSingle(event));
+        String[] l = lore.getArray(event);
+        for (int i = 0; i < l.length; i++) {
+            l[i] =  ChatColor.translateAlternateColorCodes('&', l[i]);
+        }
         ItemStack item = new ItemStack(m, a);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(n);
@@ -64,7 +64,7 @@ public class ExprCreateItem extends SimpleExpression<ItemStack> {
         material = (Expression<String>) expressions[0];
         name = (Expression<String>) expressions[1];
         amount = (Expression<Number>) expressions[2];
-        lore = (Expression<List<String>>) expressions[3];
+        lore = (Expression<String>) expressions[3];
         return true;
     }
 }
