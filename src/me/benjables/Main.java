@@ -35,7 +35,11 @@ public class Main extends JavaPlugin {
                 e.printStackTrace();
             }
         }
-        logger.info("SkTest enabled!");
+        logger.info("skJava enabled!");
+    }
+
+    public void onDisable() {
+        logger.info("skJava disabled!");
     }
 
     public Main getInstance() {

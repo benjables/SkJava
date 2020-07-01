@@ -1,6 +1,6 @@
-name: SKTest
+name: skJava
 main: me.benjables.Main
-description: This is a skript addon
+description: Skript addon that adds java syntax to skript
 version: 1.0
 author: benjables
 softdepend:
