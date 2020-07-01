@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SkriptAddon:jar">
+    <output-path>$USER_HOME$/Desktop/Servers/1.12.2/plugins</output-path>
+    <root id="archive" name="SkriptAddon.jar">
+      <element id="module-output" name="SkriptAddon" />
+      <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
+    </root>
+  </artifact>
+</component>

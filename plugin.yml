@@ -1,0 +1,7 @@
+name: SKTest
+main: me.benjables.Main
+description: This is a skript addon
+version: 1.0
+author: benjables
+softdepend:
+  - Skript
